@@ -1,0 +1,1 @@
+/Users/ludovic.trebalag/Documents/1_Works/Perso/2_Formation_Docstring/TableauDeBoard/venv/bin/python /Users/ludovic.trebalag/Documents/1_Works/Perso/2_Formation_Docstring/TableauDeBoard/src/manage.py runserver
