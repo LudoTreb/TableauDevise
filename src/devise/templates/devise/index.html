@@ -10,27 +10,30 @@
 </head>
 <body class="bg-dark">
 
-    <div class="container-fluide">
-        <div class="row">
-            <div class="col">
-                <h1 class="text-white">Tableau de bord - {{ page_label }}</h1>
-                <a href="{% url 'home' days_range=7 currencies=currencies %}" class="btn {% if page_label == 'Semaine' %} btn-info {% else %} btn-secondary {% endif%}">Semaine</a>
-                <a href="{% url 'home' days_range=30 currencies=currencies %}" class="btn {% if page_label == 'Mois' %} btn-info {% else %} btn-secondary {% endif%}">Mois</a>
-                <a href="{% url 'home' days_range=365 currencies=currencies %}" class="btn {% if page_label == 'Année' %} btn-info {% else %} btn-secondary {% endif%}">Année</a>
-            </div>
-        </div>
-        <div class="row justify-content-center">
-            {% for currency, rates in data.items %}
-                <div class="col-md-10 col-lg-6">
-
-                    <canvas id="chart-{{ currency }}"></canvas>
-
-                </div>
-            {% endfor %}
+<div class="container-fluide">
+    <div class="row">
+        <div class="col">
+            <h1 class="text-white">Tableau de bord - {{ page_label }}</h1>
+            <a href="{% url 'home' days_range=7 currencies=currencies %}"
+               class="btn {% if page_label == 'Semaine' %} btn-info {% else %} btn-secondary {% endif%}">Semaine</a>
+            <a href="{% url 'home' days_range=30 currencies=currencies %}"
+               class="btn {% if page_label == 'Mois' %} btn-info {% else %} btn-secondary {% endif%}">Mois</a>
+            <a href="{% url 'home' days_range=365 currencies=currencies %}"
+               class="btn {% if page_label == 'Année' %} btn-info {% else %} btn-secondary {% endif%}">Année</a>
         </div>
     </div>
+    <div class="row justify-content-center">
+        {% for currency, rates in data.items %}
+        <div class="col-md-10 col-lg-6">
 
-    <script>
+            <canvas id="chart-{{ currency }}"></canvas>
+
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<script>
     {% for currency, rates in data.items %}
         var ctx = document.getElementById("chart-{{ currency }}");
         new Chart(ctx, {
@@ -42,14 +45,15 @@
                             fill: false,
                             borderColor: 'rgb(255, 128, 128)',
                             trendlineLinear: {
-                                colorMin: "rgb(125, 0, 250)",
-                                colorMax: "rgb(100, 0, 225)",
+                                colorMin: "rgb(4, 28, 246)",
+                                colorMax: "rgb(255, 0, 161)",
                                 width: 2,
                             }
                        }]
                 }
         });
     {% endfor %}
-    </script>
+
+</script>
 </body>
 </html>
