@@ -5,34 +5,37 @@
     <title>Title</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.min.js"
-            integrity="sha512-v3ygConQmvH0QehvQa6gSvTE2VdBZ6wkLOlmK7Mcy2mZ0ZF9saNbbk19QeaoTHdWIEiTlWmrwAL4hS8ElnGFbA=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.2.1/chart.umd.js"></script>
 </head>
 <body class="bg-dark">
 
     <div class="container-fluide">
         <div class="row justify-content-center">
-            <div class="col-md-10 col-lg-6 bg-info">
-                <h1>Hello World</h1>
-                <canvas id="chart"></canvas>
-            </div>
+            {% for currency, rates in data.items %}
+                <div class="col-md-10 col-lg-6 bg-info">
+
+                    <canvas id="chart-{{ currency }}"></canvas>
+
+                </div>
+            {% endfor %}
         </div>
     </div>
 
     <script>
-        var ctx = document.getElementById("chart");
+    {% for currency, rates in data.items %}
+        var ctx = document.getElementById("chart-{{ currency }}");
         new Chart(ctx, {
                 type: 'line',
-                data: {labels: [1, 2, 3, 4, 5],
+                data: {labels: {{ days_labels|safe }},
                        datasets: [{
-                            label: "USD",
-                            data: [1, 3, 2, 7, 4],
+                            label: "{{ currency }}",
+                            data: {{ rates|safe }},
                             fill: false,
                             borderColor: 'rgb(255, 128, 128)'
                        }]
                 }
         });
+    {% endfor %}
     </script>
 </body>
 </html>

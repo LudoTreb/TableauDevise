@@ -15,9 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from devise.views import dashboard
+from devise.views import dashboard_view
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path("", dashboard),
+    path("days=<int:days_range>&currencies=<str:currencies>", dashboard_view),
 ]

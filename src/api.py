@@ -33,3 +33,4 @@ def get_rates(currencies, days=30):
 if __name__ == '__main__':
     days, rates = get_rates(["AUD", "UAH"])
 
+
